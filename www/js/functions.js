@@ -75,7 +75,6 @@ function doneScanning(event,scanResult)
 /*----------------------------------------------------------------------*/
 function renderOnlineSinglePage(scanResult)
 {
-
 	$(".content-cont").empty();
 	$(".content-cont").append('<img src="img/loading.gif" style="margin:15% auto; width:25%; display:block;"/>');
 	
@@ -169,6 +168,6 @@ function renderOnlineSinglePage(scanResult)
 
   
 }
-/*----------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------*/
 /*-------------------//itemScannedListener.js-------------------------------*/
 /*----------------------------------------------------------------------*/
