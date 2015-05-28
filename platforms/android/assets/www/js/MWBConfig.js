@@ -8,6 +8,8 @@ var MWBSInitSpace = MWBSInitSpace || {};
  
  */
 MWBSInitSpace.init = function(mwbs,constants,dvc){
+	     
+	
     console.log('MWBSInitSpace.init Invoked at: '+ (new Date()).getTime());
     //change these registration settings to match your licence keys
     /* BEGIN Registration settings */
@@ -106,19 +108,30 @@ MWBSInitSpace.callback = function(result){
      //result.code - string representation of barcode result
      //result.type - type of barcode detected
      //result.bytes - bytes array of raw barcode result
-     
-    //alert('Scan complete');
-    if (result.type == 'Cancel'){
+
+	
+    
+    if (result.type == 'Cancel')
+	{
         //Perform some action on scanning canceled if needed
         $('.webdefault').click();
+		
+
     } 
     else
         if (result && result.code){
             //navigator.notification.alert(result.code, function(){}, result.type, 'Close');
 			scanResult = result.code;
-          alert(scanResult);
+         // alert(scanResult);
             
-         
-            doneScanning(event,scanResult);
+			if(networkstatus == 'disconnected')
+			{
+				$('.content-cont').empty();
+				$('.content-cont').append('scan failed because you were offline. Please try again once online.');
+			}
+			else
+			{
+				doneScanning(event,scanResult);
+			}
         }
 }

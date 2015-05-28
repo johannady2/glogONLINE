@@ -26,7 +26,7 @@ function onDeviceOffline()
 {
 
 
-    $('.noti-online , .splashscreencont').hide();
+    $('.splashscreencont').hide();
     $('.noti-blanket , .noti-offline').show();
 
         networkstatus = 'disconnected';
@@ -38,21 +38,13 @@ function onDeviceOffline()
 function onDeviceOnline()
 { 
    networkstatus = 'connected';
-    $('.noti-offline, .splashscreencont').hide();
-   $('.noti-blanket , .noti-online').show();      
+    $('.noti-blanket, .noti-offline, .splashscreencont').hide();
+	$('.splashscreencont').show();
+    $('.splashloading').hide();
+ 	$('.slideToUnlock').show();
     
 }
 
-
-$('.btn-noti-online').on('click',function()
-{
-    
-    $('.noti-blanket, .noti-online').hide();
-    $('.splashscreencont').show();
-	$('.splashloading').hide();
- 	$('.slideToUnlock').show();
-    
-});
 
 /*----------------------------------------------------------------------*/
 /*-------------------custom events-------------------------------*/

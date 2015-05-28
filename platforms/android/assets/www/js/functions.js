@@ -26,7 +26,7 @@ function onDeviceOffline()
 {
 
 
-    $('.noti-online , .splashscreencont').hide();
+    $('.splashscreencont').hide();
     $('.noti-blanket , .noti-offline').show();
 
         networkstatus = 'disconnected';
@@ -38,21 +38,13 @@ function onDeviceOffline()
 function onDeviceOnline()
 { 
    networkstatus = 'connected';
-    $('.noti-offline, .splashscreencont').hide();
-   $('.noti-blanket , .noti-online').show();      
+    $('.noti-blanket, .noti-offline, .splashscreencont').hide();
+	$('.splashscreencont').show();
+    $('.splashloading').hide();
+ 	$('.slideToUnlock').show();
     
 }
 
-
-$('.btn-noti-online').on('click',function()
-{
-    
-    $('.noti-blanket, .noti-online').hide();
-    $('.splashscreencont').show();
-	$('.splashloading').hide();
- 	$('.slideToUnlock').show();
-    
-});
 
 /*----------------------------------------------------------------------*/
 /*-------------------custom events-------------------------------*/
@@ -75,7 +67,6 @@ function doneScanning(event,scanResult)
 /*----------------------------------------------------------------------*/
 function renderOnlineSinglePage(scanResult)
 {
-
 	$(".content-cont").empty();
 	$(".content-cont").append('<img src="img/loading.gif" style="margin:15% auto; width:25%; display:block;"/>');
 	
@@ -98,28 +89,22 @@ function renderOnlineSinglePage(scanResult)
 											
 											if(i == 'PictureFileName_InvtyCat')
 											{	
-												
 												onlineSingleItemPictureFileName = val[i];
 											}
 											else if(i == 'Barcode_InvtyCat')
 											{
-											
 												onlineSingleItemBarcode = val[i];
 											}
 											else if(i == 'Brand_InvtyCat')
 											{
-												
 												onlineSingleItemBrand = val[i];
-												
 											}
 											else if(i == 'FullDescription_InvtyCat')
 											{
-									
 												 onlineSingleItemFullDescription = val[i];
 											}
 											else if(i == 'PromoName_InvtyCat')
 											{
-												
 												 onlineSingleItemPromoName = val[i];
 											}
 											else if(i == 'PromoPrice_InvtyCat')
@@ -152,7 +137,7 @@ function renderOnlineSinglePage(scanResult)
 						$('.onlineSingleItemPromoName').append(onlineSingleItemPromoName);
 						$('.onlineSingleItemPromoPrice').append(onlineSingleItemPromoPrice);
 						
-						/*because when item is not available, variables are not updated which causes the last avaialble item to appear on online-single-item.html... By assigning them with '' value, I can output, "iteme unavailable" when item is not available according to the api*/
+						/*because when item is not available, variables are not updated which causes the last avaialble item to appear on online-single-item.html... By assigning them with '' value, I can output, "iteme unavailable" when value is '' item is not available according to the api*/
 						onlineSingleItemPictureFileName = '';
 						onlineSingleItemBarcode = '';
 						onlineSingleItemBrand = '';
@@ -162,12 +147,12 @@ function renderOnlineSinglePage(scanResult)
 				 	});
 				
 				
-					}
-					else
-					{
-						$(".content-cont").empty();
-						$(".content-cont").append('<p>Item Unavailable</p>');
-					}
+				}
+				else
+				{
+					$(".content-cont").empty();
+					$(".content-cont").append('<p>Item Unavailable</p>');
+				}
 				
 			
 			});
@@ -175,6 +160,6 @@ function renderOnlineSinglePage(scanResult)
 
   
 }
-/*----------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------*/
 /*-------------------//itemScannedListener.js-------------------------------*/
 /*----------------------------------------------------------------------*/

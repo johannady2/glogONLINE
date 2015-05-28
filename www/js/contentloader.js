@@ -21,7 +21,7 @@
 					  $('.content-cont').css('marginTop','60px');
 						$('.content-cont').css('marginBottom','60px');
 					 
-					 $('.content-cont').append('<p>You have\'nt scanned anything. <a href="#"  onclick="scanner.startScanning(MWBSInitSpace.init,MWBSInitSpace.callback)">Click here</a> to scan an item.</p>');
+					 	$('.content-cont').append('<p>You have\'nt scanned anything. <a href="#"  onclick="scanner.startScanning(MWBSInitSpace.init,MWBSInitSpace.callback)">Click here</a> to scan an item.</p>');
 
 
 
