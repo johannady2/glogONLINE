@@ -8,6 +8,8 @@ $(document).on('itemScanned',function(event,scanResult)
 			$('.content-cont').append('scan failed because you were offline. Please try again once online.');
 			//can add "click here" with scanResult variable to retrieve once online.
 			//by modifying ondeviceonline code, i can make it load automatically once online.
+			
+			scanResultWhenOffline = scanResult;
 		}
 		else
 		{

@@ -124,14 +124,8 @@ MWBSInitSpace.callback = function(result){
 			scanResult = result.code;
          // alert(scanResult);
             
-			if(networkstatus == 'disconnected')
-			{
-				$('.content-cont').empty();
-				$('.content-cont').append('scan failed because you were offline. Please try again once online.');
-			}
-			else
-			{
+	
 				doneScanning(event,scanResult);
-			}
+			
         }
 }

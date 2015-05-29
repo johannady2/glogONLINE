@@ -1,10 +1,16 @@
 var networkstatus = '';
+
 var onlineSingleItemPictureFileName;
 var onlineSingleItemBarcode;
 var onlineSingleItemBrand;
 var onlineSingleItemFullDescription;
 var onlineSingleItemPromoName;
 var onlineSingleItemPromoPrice;
+
+if(scanResultWhenOffline == null)//initialize when not initialized
+{
+	var scanResultWhenOffline;
+}
 
 
 
@@ -24,7 +30,7 @@ function onBodyLoad()
 
 function onDeviceOffline()
 {
-
+	
 
     $('.splashscreencont').hide();
     $('.noti-blanket , .noti-offline').show();
@@ -37,7 +43,13 @@ function onDeviceOffline()
 
 function onDeviceOnline()
 { 
-   networkstatus = 'connected';
+	networkstatus = 'connected';
+	if(scanResultWhenOffline != null)
+	{
+		renderOnlineSinglePage(scanResultWhenOffline);
+	}
+	
+  
     $('.noti-blanket, .noti-offline, .splashscreencont').hide();
 	$('.splashscreencont').show();
     $('.splashloading').hide();
