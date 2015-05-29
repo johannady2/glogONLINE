@@ -12,6 +12,7 @@ if(scanResultWhenOffline == null)//initialize when not initialized
 	var scanResultWhenOffline;
 }
 
+var ref;
 
 
 function onBodyLoad()
@@ -75,7 +76,7 @@ function doneScanning(event,scanResult)
 /*----------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------*/
-/*-------------------itemScannedListener.js-------------------------------*/
+/*-------------------online-single-item.html------------------------------*/
 /*----------------------------------------------------------------------*/
 function renderOnlineSinglePage(scanResult)
 {
@@ -141,13 +142,14 @@ function renderOnlineSinglePage(scanResult)
 				if(onlineSingleItemBarcode != null && onlineSingleItemBarcode != '')
 				{
 				 	$(".content-cont").unload().load('online-single-item.html',  null, function()
-					{
+					{	
+						$('.addToPrestaCart').attr('data-barcode',onlineSingleItemBarcode);
+						$('.onlineSingleItemPromoPrice').append(onlineSingleItemPromoPrice);
 						$('.onlineSingleItemPictureFileName').attr('src',onlineSingleItemPictureFileName);
-						//onlineSingleItemBarcode
 						$('.onlineSingleItemFullDescription').append(onlineSingleItemFullDescription);
 						$('.onlineSingleItemBrand').append(onlineSingleItemBrand);
 						$('.onlineSingleItemPromoName').append(onlineSingleItemPromoName);
-						$('.onlineSingleItemPromoPrice').append(onlineSingleItemPromoPrice);
+						
 						
 						/*because when item is not available, variables are not updated which causes the last avaialble item to appear on online-single-item.html... By assigning them with '' value, I can output, "iteme unavailable" when value is '' item is not available according to the api*/
 						onlineSingleItemPictureFileName = '';
@@ -172,6 +174,109 @@ function renderOnlineSinglePage(scanResult)
 
   
 }
+
+
+
+$(document).on('input','#onlineSingleItemEnteredQuantity',function ()
+{
+	/*keycodes undefined are undefined so i did this instead*/
+
+
+	var glogprice = $('.onlineSingleItemPromoPrice').html(); 
+
+	 var currentvalue = $('#onlineSingleItemEnteredQuantity').val();
+	 var glogqlen = $.trim($('#onlineSingleItemEnteredQuantity').val());
+
+	//alert('glogqlen ='+glogqlen);
+
+	if(glogqlen.length>0 && currentvalue != 0 && currentvalue !='0' && testinput(/[^0-9.]/, currentvalue)==0)//if not empty && not zero && (does not contain any none numeric)
+	{
+	  //alert('in if');
+		//alert('currentvalue =' + currentvalue);
+
+		var newvalue = currentvalue.toString().replace(/[^0-9\.]+/g, '');
+		$('#onlineSingleItemEnteredQuantity').val(newvalue);
+		var qval = $('#onlineSingleItemEnteredQuantity').val();
+
+
+	}
+	else
+	{
+
+	  //alert('in else');
+		currentvalue = 1;
+	   // //alert('currentvalue =' + currentvalue);
+
+		var newvalue = currentvalue.toString().replace(/[^0-9\.]+/g, '');
+		$('#onlineSingleItemEnteredQuantity').val('');
+		var qval = 1;
+
+	}
+
+
+	//alert('after if else');
+
+
+
+		parseInt(qval);
+
+	   // //alert(qval);
+		var glogtotaltemp = qval *  glogprice;   
+		var glogtotal = glogtotaltemp.toFixed(2);
+	   // //alert('glogtotal =' + glogtotal);
+		$('.glogtotal').empty();
+		$('.glogtotal').append(glogtotal);
+
+
+		$('.addToPrestaCart').attr('data-quantity',qval);
+		//$('.addToPrestaCart').attr('data-subtotal',glogtotal);//no need for this data
+
+
+});
+    
+
+function testinput(re, str)
+{
+  
+    
+    if (re.test(str) && (str.length == 1))
+    {
+       // //alert('contains none numeric and string length == 1');
+        return 1;
+    } 
+    else
+    {
+      //  //alert('does not contain none numeric || or contains but length > 1');
+        return 0;
+    }
+  
+}
+
+
+$('body').on('click','.addToPrestaCart',function()
+{
+	alert($(this).attr('data-quantity'));
+	ref = window.open('http://viveg.net/index.php?barcode='+$(this).attr('data-barcode')+'&quantity='+$(this).attr('data-quantity')+'&localmobiledate='+getDateNow()+'&glog-app-access=76ef0d45220fdee3ac883a0c7565e50c', '_blank', 'location=yes');
+});
+
 /*-----------------------------------------------------------------------*/
-/*-------------------//itemScannedListener.js-------------------------------*/
+/*-------------------//online-single-item.html-------------------------------*/
 /*----------------------------------------------------------------------*/
+
+function getDateNow()
+{
+    
+    var d = new Date();
+
+	var month = d.getMonth()+1;
+	var day = d.getDate();
+	var hours = d.getHours();
+	var minutes = d.getMinutes();
+	var seconds = d.getSeconds();
+
+	var output = d.getFullYear() + '-' +
+		(month<10 ? '0' : '') + month + '-' +
+		(day<10 ? '0' : '') + day;
+
+	return output;
+}

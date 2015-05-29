@@ -60,6 +60,7 @@
 		62D20903588E41A485A37924 /* CDVConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 556E7F0ABF6843DCA28CEE14 /* CDVConnection.m */; };
 		D50EDD416A7A4872986DC6BF /* CDVReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D2FD26EED6D4E7AA94C2BC0 /* CDVReachability.m */; };
 		24A8DF76E9F244568B51C494 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE2123F4699449EB4411FE9 /* SystemConfiguration.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		585C038BD6E84814B151A883 /* CDVInAppBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = B18A2EB8864E49CA9B8D1D2D /* CDVInAppBrowser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -155,6 +156,8 @@
 		3DBFC1C763714C89A54692C7 /* CDVConnection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVConnection.h"; path = "org.apache.cordova.network-information/CDVConnection.h"; sourceTree = "<group>"; fileEncoding = 4; };
 		E85FBC5081394A6C8C554FB0 /* CDVReachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVReachability.h"; path = "org.apache.cordova.network-information/CDVReachability.h"; sourceTree = "<group>"; fileEncoding = 4; };
 		EAE2123F4699449EB4411FE9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "SystemConfiguration.framework"; path = "System/Library/Frameworks/SystemConfiguration.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		B18A2EB8864E49CA9B8D1D2D /* CDVInAppBrowser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVInAppBrowser.m"; path = "cordova-plugin-inappbrowser/CDVInAppBrowser.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		D7D9152D2F2C43FFAC4DD794 /* CDVInAppBrowser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVInAppBrowser.h"; path = "cordova-plugin-inappbrowser/CDVInAppBrowser.h"; sourceTree = "<group>"; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,6 +291,8 @@
 				8D2FD26EED6D4E7AA94C2BC0 /* CDVReachability.m */,
 				3DBFC1C763714C89A54692C7 /* CDVConnection.h */,
 				E85FBC5081394A6C8C554FB0 /* CDVReachability.h */,
+				B18A2EB8864E49CA9B8D1D2D /* CDVInAppBrowser.m */,
+				D7D9152D2F2C43FFAC4DD794 /* CDVInAppBrowser.h */,
 			);
 			name = Plugins;
 			path = "glogONLINE/Plugins";
@@ -488,6 +493,7 @@
 				1B0898BDC0404DEE9797C664 /* MWScannerViewController.xib in Resources */,
 				62D20903588E41A485A37924 /* CDVConnection.m in Sources */,
 				D50EDD416A7A4872986DC6BF /* CDVReachability.m in Sources */,
+				585C038BD6E84814B151A883 /* CDVInAppBrowser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

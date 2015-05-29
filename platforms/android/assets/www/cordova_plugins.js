@@ -28,6 +28,14 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+        "id": "cordova-plugin-inappbrowser.inappbrowser",
+        "clobbers": [
+            "cordova.InAppBrowser.open",
+            "window.open"
+        ]
+    },
+    {
         "file": "plugins/org.apache.cordova.dialogs/www/notification.js",
         "id": "org.apache.cordova.dialogs.notification",
         "merges": [
@@ -55,6 +63,7 @@ module.exports.metadata =
     "cordova-plugin-whitelist": "1.0.0",
     "com.manateeworks.barcodescanner": "1.5.3",
     "org.apache.cordova.network-information": "0.2.15",
+    "cordova-plugin-inappbrowser": "1.0.0",
     "org.apache.cordova.dialogs": "0.3.0",
     "org.apache.cordova.device": "0.3.0"
 }
