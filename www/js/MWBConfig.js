@@ -15,7 +15,7 @@ MWBSInitSpace.init = function(mwbs,constants,dvc){
     /* BEGIN Registration settings */
 
     //if your app doesn't work after setting license keys, try to uncomment the try-catch, and see what the error is
-    
+   
 //    try{
         var mwregister = {
            'Android' : {

@@ -255,7 +255,7 @@ function testinput(re, str)
 
 $('body').on('click','.addToPrestaCart',function()
 {
-	alert($(this).attr('data-quantity'));
+	
 	ref = window.open('http://viveg.net/index.php?barcode='+$(this).attr('data-barcode')+'&quantity='+$(this).attr('data-quantity')+'&localmobiledate='+getDateNow()+'&glog-app-access=76ef0d45220fdee3ac883a0c7565e50c', '_blank', 'location=yes');
 });
 

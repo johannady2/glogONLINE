@@ -21,7 +21,7 @@
         <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
     </feature>
     <allow-intent href="market:*" />
-    <name>glogONLINE</name>
+    <name>G-log Online</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
     </description>
