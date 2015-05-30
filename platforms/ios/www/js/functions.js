@@ -145,6 +145,7 @@ function renderOnlineSinglePage(scanResult)
 					{	
 						$('.addToPrestaCart').attr('data-barcode',onlineSingleItemBarcode);
 						$('.onlineSingleItemPromoPrice').append(onlineSingleItemPromoPrice);
+						$('.glogtotal').append(onlineSingleItemPromoPrice);
 						$('.onlineSingleItemPictureFileName').attr('src',onlineSingleItemPictureFileName);
 						$('.onlineSingleItemFullDescription').append(onlineSingleItemFullDescription);
 						$('.onlineSingleItemBrand').append(onlineSingleItemBrand);
