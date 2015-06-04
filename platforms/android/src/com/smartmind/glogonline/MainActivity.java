@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /*
        Licensed to the Apache Software Foundation (ASF) under one
        or more contributor license agreements.  See the NOTICE file
@@ -17,20 +15,20 @@
        KIND, either express or implied.  See the License for the
        specific language governing permissions and limitations
        under the License.
-*/
+ */
 
-var build = require('./lib/build'),
-    args  = process.argv;
+package com.smartmind.glogonline;
 
-// Handle help flag
-if (['--help', '/?', '-h', 'help', '-help', '/help'].indexOf(args[2]) > -1) {
-    build.help();
-} else {
-    build.run(args).done(function() {
-        console.log('** BUILD SUCCEEDED **');
-    }, function(err) {
-        var errorMessage = (err && err.stack) ? err.stack : err;
-        console.error(errorMessage);
-        process.exit(2);
-    });
+import android.os.Bundle;
+import org.apache.cordova.*;
+
+public class MainActivity extends CordovaActivity
+{
+    @Override
+    public void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        // Set by <content src="index.html" /> in config.xml
+        loadUrl(launchUrl);
+    }
 }
