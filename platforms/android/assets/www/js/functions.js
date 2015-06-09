@@ -161,7 +161,12 @@
                                 $('.addToPrestaCart').hide();
                             }
                             
-                            
+                            setTimeout(function()
+                            {
+                                 $('.content-cont').empty();
+                                $('.content-cont').append('<p>Time Out. Please Scan Again.  <a href="#" onclick="scanner.startScanning(MWBSInitSpace.init,MWBSInitSpace.callback)">Click here</a></p>');
+
+                            }, 60000);
 
 							/*because when item is not available, variables are not updated which causes the last avaialble item to appear on online-single-item.html... By assigning them with '' value, I can output, "iteme unavailable" when value is '' item is not available according to the api*/
 							onlineSingleItemPictureFileName = '';
@@ -341,3 +346,4 @@ $('.content-cont').bind("DOMSubtreeModified",function()
 
  
 });
+
