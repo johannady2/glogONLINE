@@ -6,6 +6,7 @@
 	var onlineSingleItemFullDescription;
 	var onlineSingleItemPromoName;
 	var onlineSingleItemPromoPrice;
+    var timerId = setInterval(function(){  bugFix(); }, 3000);
 
 	if(scanResultWhenOffline == null)//initialize when not initialized
 	{
@@ -124,6 +125,8 @@
 												{
 													 onlineSingleItemPromoPrice = val[i];
 												}
+                                            
+                                                onlineSingleItemStocksAvailable = 10;
 
 										});	
 
@@ -150,7 +153,15 @@
 							$('.onlineSingleItemFullDescription').append(onlineSingleItemFullDescription);
 							$('.onlineSingleItemBrand').append(onlineSingleItemBrand);
 							$('.onlineSingleItemPromoName').append(onlineSingleItemPromoName);
-
+							$('.onlineSingleItemStocksAvailable').append(onlineSingleItemStocksAvailable);
+                           
+                            if(onlineSingleItemEnteredQuantity <= 0)
+                            {
+                                $('.addToPrestaCart').after('<p class="warning">Item out of stock</p>');
+                                $('.addToPrestaCart').hide();
+                            }
+                            
+                            
 
 							/*because when item is not available, variables are not updated which causes the last avaialble item to appear on online-single-item.html... By assigning them with '' value, I can output, "iteme unavailable" when value is '' item is not available according to the api*/
 							onlineSingleItemPictureFileName = '';
@@ -159,6 +170,7 @@
 							onlineSingleItemFullDescription = '';
 							onlineSingleItemPromoName = '';
 							onlineSingleItemPromoPrice = '';
+                            //onlineSingleItemStocksAvailable
 						});
 
 
@@ -196,8 +208,29 @@
 			//alert('currentvalue =' + currentvalue);
 
 			var newvalue = currentvalue.toString().replace(/[^0-9\.]+/g, '');
-			$('#onlineSingleItemEnteredQuantity').val(newvalue);
-			var qval = $('#onlineSingleItemEnteredQuantity').val();
+			
+            
+            if(newvalue > onlineSingleItemStocksAvailable)
+            {
+                
+                $('.noti-any , .noti-blanket').show();
+                $('.noti-any').empty();
+                $('.noti-any').append('There are only' + onlineSingleItemStocksAvailable + ' stocks left');
+                
+                
+                setTimeout(function()
+                {
+                     $('.noti-any , .noti-blanket').hide();
+                }, 1500);
+                               
+               $('#onlineSingleItemEnteredQuantity').val(onlineSingleItemStocksAvailable); 
+            }
+            else
+            {   $('#onlineSingleItemEnteredQuantity').val(newvalue);
+			    
+            }
+            
+            var qval = $('#onlineSingleItemEnteredQuantity').val();
 
 
 		}
@@ -208,9 +241,11 @@
 			currentvalue = 1;
 		   // //alert('currentvalue =' + currentvalue);
 
-			var newvalue = currentvalue.toString().replace(/[^0-9\.]+/g, '');
+			//var newvalue = currentvalue.toString().replace(/[^0-9\.]+/g, '');
+            
 			$('#onlineSingleItemEnteredQuantity').val('');
 			var qval = 1;
+            
 
 		}
 

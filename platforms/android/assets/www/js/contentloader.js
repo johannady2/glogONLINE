@@ -15,7 +15,7 @@
 			 
 			 
 				 $(".slideToUnlock").on('click',function()
-				 {
+				 {      clearInterval(timerId);
 
 						$('.site-content').addClass('container');
 						$('body').css('background-image', 'none');

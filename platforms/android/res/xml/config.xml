@@ -29,6 +29,8 @@
         Apache Cordova Team
     </author>
     <content src="index.html" />
+    <preference name="Fullscreen" value="true" />
+    <preference name="Orientation" value="portrait" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
