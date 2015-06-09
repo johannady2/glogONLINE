@@ -207,12 +207,13 @@
 
 		//alert('glogqlen ='+glogqlen);
 
-		if(glogqlen.length>0 && currentvalue != 0 && currentvalue !='0' && testinput(/[^0-9.]/, currentvalue)==0)//if not empty && not zero && (does not contain any none numeric)
+		if(glogqlen.length>0 && currentvalue != 0 && currentvalue !='0' && testinput(/[^0-9]/, currentvalue)==0)//if not empty && not zero && (does not contain any none numeric)
 		{
 		  //alert('in if');
 			//alert('currentvalue =' + currentvalue);
 
-			var newvalue = currentvalue.toString().replace(/[^0-9\.]+/g, '');
+            var newvalue = currentvalue.toString().replace(/[^0-9]+/g, '');
+	    
 			
             
             if(newvalue > onlineSingleItemStocksAvailable)
@@ -246,7 +247,7 @@
 			currentvalue = 1;
 		   // //alert('currentvalue =' + currentvalue);
 
-			//var newvalue = currentvalue.toString().replace(/[^0-9\.]+/g, '');
+			var newvalue = currentvalue.toString().replace(/[^0-9]+/g, '');
             
 			$('#onlineSingleItemEnteredQuantity').val('');
 			var qval = 1;
