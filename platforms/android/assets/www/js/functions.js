@@ -6,6 +6,8 @@
 	var onlineSingleItemFullDescription;
 	var onlineSingleItemPromoName;
 	var onlineSingleItemPromoPrice;
+    var stocksavailable;   
+    var onlineSingleItemStocksAvailable;
     var timerId = setInterval(function(){  bugFix(); }, 3000);
 
 	if(scanResultWhenOffline == null)//initialize when not initialized
@@ -13,7 +15,7 @@
 		var scanResultWhenOffline;
 	}
 
-	var ref;
+	var ref = null;
 
 
 	function onBodyLoad()
@@ -125,8 +127,19 @@
 												{
 													 onlineSingleItemPromoPrice = val[i];
 												}
-                                            
-                                                onlineSingleItemStocksAvailable = 10;
+                                                else if(i == 'Stock_InvtyCat')
+                                                {
+                                                    onlineSingleItemStocksAvailable = val[i];
+                                                }
+                                               /* else if(i == 'PromoStartDate_CatMstr')
+                                                {
+                                                    onlineSingleItemPromoStartDate = val[i];
+                                                }
+                                                else if(i == 'PromoEndDate_CatMstr')
+                                                {
+                                                    onlineSingleItemPromoEndDate = val[i];
+                                                }*/
+                                               
 
 										});	
 
@@ -146,6 +159,8 @@
 					{
 						$(".content-cont").unload().load('online-single-item.html',  null, function()
 						{	
+                            //alert(onlineSingleItemPromoStartDate);
+                            //alert(onlineSingleItemPromoEndDate);
 							$('.addToPrestaCart').attr('data-barcode',onlineSingleItemBarcode);
 							$('.onlineSingleItemPromoPrice').append(onlineSingleItemPromoPrice);
 							$('.glogtotal').append(onlineSingleItemPromoPrice);
@@ -155,7 +170,7 @@
 							$('.onlineSingleItemPromoName').append(onlineSingleItemPromoName);
 							$('.onlineSingleItemStocksAvailable').append(onlineSingleItemStocksAvailable);
                            
-                            if(onlineSingleItemEnteredQuantity <= 0)
+                            if(onlineSingleItemStocksAvailable <= 0)
                             {
                                 $('.addToPrestaCart').after('<p class="warning">Item out of stock</p>');
                                 $('.addToPrestaCart').hide();
@@ -175,7 +190,10 @@
 							onlineSingleItemFullDescription = '';
 							onlineSingleItemPromoName = '';
 							onlineSingleItemPromoPrice = '';
-                            //onlineSingleItemStocksAvailable
+                            stocksavailable =  onlineSingleItemStocksAvailable;
+                            onlineSingleItemStocksAvailable = '';
+                            
+                            
 						});
 
 
@@ -198,8 +216,6 @@
 	$(document).on('input','#onlineSingleItemEnteredQuantity',function ()
 	{
 		/*keycodes undefined are undefined so i did this instead*/
-
-
 		var glogprice = $('.onlineSingleItemPromoPrice').html(); 
 
 		 var currentvalue = $('#onlineSingleItemEnteredQuantity').val();
@@ -211,17 +227,20 @@
 		{
 		  //alert('in if');
 			//alert('currentvalue =' + currentvalue);
-
+            
             var newvalue = currentvalue.toString().replace(/[^0-9]+/g, '');
 	    
-			
+		
             
-            if(newvalue > onlineSingleItemStocksAvailable)
+
+            if(parseInt(newvalue) > parseInt(stocksavailable))
             {
+                $('#onlineSingleItemEnteredQuantity').blur();
                 
                 $('.noti-any , .noti-blanket').show();
                 $('.noti-any').empty();
-                $('.noti-any').append('There are only' + onlineSingleItemStocksAvailable + ' stocks left');
+                $('.noti-any').append('There are only  ' + stocksavailable + '  stocks left');
+                
                 
                 
                 setTimeout(function()
@@ -229,7 +248,7 @@
                      $('.noti-any , .noti-blanket').hide();
                 }, 1500);
                                
-               $('#onlineSingleItemEnteredQuantity').val(onlineSingleItemStocksAvailable); 
+               $('#onlineSingleItemEnteredQuantity').val(stocksavailable); 
             }
             else
             {   $('#onlineSingleItemEnteredQuantity').val(newvalue);
@@ -301,6 +320,14 @@
 		ref = window.open('http://viveg.net/index.php?barcode='+$(this).attr('data-barcode')+'&quantity='+$(this).attr('data-quantity')+'&localmobiledate='+getDateNow()+'&glog-app-access=76ef0d45220fdee3ac883a0c7565e50c', '_blank', 'location=yes');
 	});
 
+    $('body').on('click','.viewOnlineCart',function()
+    {
+    
+    
+        ref = window.open('http://viveg.net/index.php?controller=order', '_blank', 'location=yes'); 
+
+    });
+
 	/*-----------------------------------------------------------------------*/
 	/*-------------------//online-single-item.html-------------------------------*/
 	/*----------------------------------------------------------------------*/
@@ -347,4 +374,7 @@ $('.content-cont').bind("DOMSubtreeModified",function()
 
  
 });
+
+
+
 
