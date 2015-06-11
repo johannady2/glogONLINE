@@ -8,7 +8,49 @@
 	var onlineSingleItemPromoPrice;
     var stocksavailable;   
     var onlineSingleItemStocksAvailable;
-    var timerId = setInterval(function(){  bugFix(); }, 3000);
+    var timerId;
+    setTimeout(function()
+    {
+
+
+    timerId = setInterval(function(){  bugFix(); }, 1800);
+
+    }, 3000);
+
+
+
+function bugFix()//sometimes noti popups don't appear so we check it and make them appear.
+{
+
+	if($('.splashpageindicator').is(":visible"))
+	{
+		if(($('.slideToUnlock').is(":visible") == false) && ($('.splashloading').is(":visible")== false))
+		{
+			
+			
+			if(($('.noti-offline').is(":hidden") == true) && ($('.noti-online').is(":hidden") == true))
+			{
+				
+				if(networkstatus !='disconnected' && networkstatus !='connected')
+				{
+					location.reload();
+				}
+			}
+			
+		}
+		else
+		{
+			$('.noti-offline').hide();
+			$('.noti-online').hide();
+		}
+		
+		
+
+	}
+}
+
+
+
 
 	if(scanResultWhenOffline == null)//initialize when not initialized
 	{
@@ -354,7 +396,7 @@
 
 $('.content-cont').bind("DOMSubtreeModified",function()
 {
-
+//hide toggle menu if back button is visible
     
         if($(document).width() <= 767)
         {
