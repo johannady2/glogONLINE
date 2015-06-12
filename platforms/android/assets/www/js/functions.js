@@ -1,5 +1,5 @@
 	var networkstatus = '';
-
+    var ref = null;
 	var onlineSingleItemPictureFileName;
 	var onlineSingleItemBarcode;
 	var onlineSingleItemBrand;
@@ -18,6 +18,85 @@
     }, 3000);
 
 
+
+
+
+
+
+	if(scanResultWhenOffline == null)//initialize when not initialized
+	{
+		var scanResultWhenOffline;
+	}
+
+
+
+ document.addEventListener("deviceready", onDeviceReady, false);
+   function onDeviceReady() {
+       alert('device ready');
+        ref.addEventListener('exit', function(event){  alert('exit'); });
+    alert('device listener added');
+   }
+	function onBodyLoad()
+	{   
+		document.addEventListener("offline", onDeviceOffline, false);
+		document.addEventListener("online", onDeviceOnline, false);
+
+
+	}
+	  //listen for changes
+
+
+
+
+
+
+	function onDeviceOffline()
+	{
+
+
+		$('.splashscreencont').hide();
+		$('.noti-blanket , .noti-offline').show();
+
+			networkstatus = 'disconnected';
+
+
+	}
+
+
+	function onDeviceOnline()
+	{ 
+        
+  
+
+        
+		networkstatus = 'connected';
+		if(scanResultWhenOffline != null)
+		{
+			renderOnlineSinglePage(scanResultWhenOffline);
+		}
+
+
+		$('.noti-blanket, .noti-offline, .splashscreencont').hide();
+		$('.splashscreencont').show();
+		$('.splashloading').hide();
+		$('.slideToUnlock').show();
+        
+	}
+
+function Exit()
+{
+              navigator.notification.confirm(
+                'Do you want to exit app?',  
+                function(i){
+                    if(i==2)
+                     {
+                       navigator.app.exitApp(); //This will Close the App
+                     }
+                },              
+                'App Name',            
+                'Cancel,Exit'          
+              );
+ }
 
 function bugFix()//sometimes noti popups don't appear so we check it and make them appear.
 {
@@ -48,60 +127,6 @@ function bugFix()//sometimes noti popups don't appear so we check it and make th
 
 	}
 }
-
-
-
-
-	if(scanResultWhenOffline == null)//initialize when not initialized
-	{
-		var scanResultWhenOffline;
-	}
-
-	var ref = null;
-
-
-	function onBodyLoad()
-	{   
-		document.addEventListener("offline", onDeviceOffline, false);
-		document.addEventListener("online", onDeviceOnline, false);
-
-
-	}
-	  //listen for changes
-
-
-
-
-
-
-	function onDeviceOffline()
-	{
-
-
-		$('.splashscreencont').hide();
-		$('.noti-blanket , .noti-offline').show();
-
-			networkstatus = 'disconnected';
-
-
-	}
-
-
-	function onDeviceOnline()
-	{ 
-		networkstatus = 'connected';
-		if(scanResultWhenOffline != null)
-		{
-			renderOnlineSinglePage(scanResultWhenOffline);
-		}
-
-
-		$('.noti-blanket, .noti-offline, .splashscreencont').hide();
-		$('.splashscreencont').show();
-		$('.splashloading').hide();
-		$('.slideToUnlock').show();
-
-	}
 
 
 	/*----------------------------------------------------------------------*/
@@ -359,14 +384,14 @@ function bugFix()//sometimes noti popups don't appear so we check it and make th
 	$('body').on('click','.addToPrestaCart',function()
 	{
 
-		ref = window.open('http://viveg.net/index.php?barcode='+$(this).attr('data-barcode')+'&quantity='+$(this).attr('data-quantity')+'&localmobiledate='+getDateNow()+'&glog-app-access=76ef0d45220fdee3ac883a0c7565e50c', '_blank', 'location=yes');
+		ref = window.open('http://viveg.net/index.php?barcode='+$(this).attr('data-barcode')+'&quantity='+$(this).attr('data-quantity')+'&localmobiledate='+getDateNow()+'&glog-app-access=76ef0d45220fdee3ac883a0c7565e50c', '_blank', 'location=no,toolbar=no');
 	});
 
     $('body').on('click','.viewOnlineCart',function()
     {
     
     
-        ref = window.open('http://viveg.net/index.php?controller=order', '_blank', 'location=yes'); 
+        ref = window.open('http://viveg.net/index.php?controller=order&glog-app-access=76ef0d45220fdee3ac883a0c7565e50c', '_blank', 'location=no,toolbar=no'); 
 
     });
 

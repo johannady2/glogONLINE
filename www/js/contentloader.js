@@ -28,13 +28,16 @@
 
 
 
-
-
 					 $('nav , footer').show();
 					 $('.splashscreencont').remove();
-		
 
-					scanner.startScanning(MWBSInitSpace.init,MWBSInitSpace.callback);
+                  
+                    
+
+                   // ref = window.open('http://viveg.net/index.php?controller=order&glog-app-access=76ef0d45220fdee3ac883a0c7565e50c', '_blank', 'location=no,toolbar=no'); 
+                    ref = window.open('http://viveg.net/index.php?glog-app-access=76ef0d45220fdee3ac883a0c7565e50c', '_blank', 'location=no,toolbar=no'); 
+                    
+                    //scanner.startScanning(MWBSInitSpace.init,MWBSInitSpace.callback);
 
 				 });
          });
