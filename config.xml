@@ -12,6 +12,7 @@
 	<preference name="Orientation" value="portrait" />
     
     <plugin name="cordova-plugin-whitelist" version="1" />
+    <plugin name="InAppBrowser" value="org.apache.cordova.InAppBrowser" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

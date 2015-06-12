@@ -411,7 +411,7 @@ body
 }
 
 
-.viewItem , .addToList,.addToCart , .saveChanges , .removeFromCart , .SearchBtn , .addToPrestaCart
+.viewItem , .addToList,.addToCart , .saveChanges , .removeFromCart , .SearchBtn , .addToPrestaCart ,.yesExit, .noContinue
 {
     width:100%;
     min-height:50px;
@@ -865,7 +865,7 @@ video#bgvid{
     }
 
     
-    .viewItem , .addToList,.addToCart , .saveChanges , .removeFromCart , .SearchBtn , .addToPrestaCart
+    .viewItem , .addToList,.addToCart , .saveChanges , .removeFromCart , .SearchBtn , .addToPrestaCart ,.yesExit, .noContinue
     {
         width:100%;
         font-weight:bold;

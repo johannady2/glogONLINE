@@ -30,13 +30,9 @@
 
 
 
- document.addEventListener("deviceready", onDeviceReady, false);
-   function onDeviceReady() {
-       alert('device ready');
-        ref.addEventListener('exit', function(event){  alert('exit'); });
-    alert('device listener added');
-   }
-	function onBodyLoad()
+
+
+    function onBodyLoad()
 	{   
 		document.addEventListener("offline", onDeviceOffline, false);
 		document.addEventListener("online", onDeviceOnline, false);
@@ -62,11 +58,13 @@
 
 	}
 
+                                                                                    
+
 
 	function onDeviceOnline()
 	{ 
         
-  
+
 
         
 		networkstatus = 'connected';
@@ -80,6 +78,8 @@
 		$('.splashscreencont').show();
 		$('.splashloading').hide();
 		$('.slideToUnlock').show();
+        
+
         
 	}
 
@@ -384,14 +384,25 @@ function bugFix()//sometimes noti popups don't appear so we check it and make th
 	$('body').on('click','.addToPrestaCart',function()
 	{
 
-		ref = window.open('http://viveg.net/index.php?barcode='+$(this).attr('data-barcode')+'&quantity='+$(this).attr('data-quantity')+'&localmobiledate='+getDateNow()+'&glog-app-access=76ef0d45220fdee3ac883a0c7565e50c', '_blank', 'location=no,toolbar=no');
+		ref = window.open('http://viveg.net/index.php?barcode='+$(this).attr('data-barcode')+'&quantity='+$(this).attr('data-quantity')+'&localmobiledate='+getDateNow()+'&glog-app-access=76ef0d45220fdee3ac883a0c7565e50c', '_blank', 'location=no');
+        ref.addEventListener('loadstart', function(event) { alert('start: ' + event.url); });
+        ref.addEventListener('loadstop', function(event) { alert('stop: ' + event.url); });
+        ref.addEventListener('loaderror', function(event) { alert('error: ' + event.message); });
+        ref.addEventListener('exit', function(event) { Exit();/*alert(event.type);*/ });
+
+
 	});
 
     $('body').on('click','.viewOnlineCart',function()
     {
     
     
-        ref = window.open('http://viveg.net/index.php?controller=order&glog-app-access=76ef0d45220fdee3ac883a0c7565e50c', '_blank', 'location=no,toolbar=no'); 
+        ref = window.open('http://viveg.net/index.php?controller=order&glog-app-access=76ef0d45220fdee3ac883a0c7565e50c', '_blank', 'location=no');
+                ref.addEventListener('loadstart', function(event) { alert('start: ' + event.url); });
+        ref.addEventListener('loadstop', function(event) { alert('stop: ' + event.url); });
+        ref.addEventListener('loaderror', function(event) { alert('error: ' + event.message); });
+        ref.addEventListener('exit', function(event) {  Exit();/*alert(event.type);*/ });
+        
 
     });
 
