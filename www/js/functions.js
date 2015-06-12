@@ -8,6 +8,9 @@
 	var onlineSingleItemPromoPrice;
     var stocksavailable;   
     var onlineSingleItemStocksAvailable;
+
+
+
     var timerId;
     setTimeout(function()
     {

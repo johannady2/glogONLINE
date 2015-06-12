@@ -27,28 +27,35 @@
 					 	//$('.content-cont').append('<p>You have\'nt scanned anything. <a href="#"  onclick="scanner.startScanning(MWBSInitSpace.init,MWBSInitSpace.callback)">Click here</a> to scan an item.</p>');
 
                     $('.content-cont').empty();
-                    //$('.content-cont').append('<div class="row"><div class="col-md-12 col-sm-12 col-xs-12"><br><p>Would you like to exit this application?</p></div><div class="col-md-12 col-sm-12 col-xs-12"><button class="btn btn-sm btn-success noContinue">Continue Shopping</button></div><div class="col-md-12 col-sm-12 col-xs-12"><br><button class="btn btn-sm btn-danger yesExit">Exit</button></div></div>');
+                    $('.content-cont').append('<div class="row"><div class="col-md-12 col-sm-12 col-xs-12"><br><p>Would you like to exit this application?</p></div><div class="col-md-12 col-sm-12 col-xs-12"><button class="btn btn-sm btn-success noContinue">Continue Shopping</button></div><div class="col-md-12 col-sm-12 col-xs-12"><br><button class="btn btn-sm btn-danger yesExit">Exit</button></div></div>');
           
 					 $('nav , footer').show();
 					 $('.splashscreencont').remove();
 
-                  
+
                     
+                  
+                  
+            
 
                    // ref = window.open('http://viveg.net/index.php?controller=order&glog-app-access=76ef0d45220fdee3ac883a0c7565e50c', '_blank', 'location=no,toolbar=no'); 
                     ref = window.open('http://viveg.net/index.php?glog-app-access=76ef0d45220fdee3ac883a0c7565e50c', '_blank', 'location=no'); 
                     ref.addEventListener('loadstart', function(event) { alert('start: ' + event.url); });
-                     ref.addEventListener('loadstop', function(event) { alert('stop: ' + event.url); });
+                     ref.addEventListener('loadstop', function(event){
+                         ref.executeScript({file: "../js/custom.js"},function(){alert('script inserted');});
+                        ref.insertCSS({file: "../css/custom.css"},function(){ alert('css inserted');});
+                     });
                      ref.addEventListener('loaderror', function(event) { alert('error: ' + event.message); });
-                     ref.addEventListener('exit', function(event) {  Exit();/*alert(event.type);*/ });
+                     ref.addEventListener('exit', function(event) { alert(event.type);});
                     //scanner.startScanning(MWBSInitSpace.init,MWBSInitSpace.callback);
+                  
 
 				 });
          });
   
 
      
-    /* $('body').on("click",'.yesExit', function()
+    $('body').on("click",'.yesExit', function()
      {
           navigator.app.exitApp();
      });
@@ -57,11 +64,9 @@
     {  
         ref = window.open('http://viveg.net/index.php?glog-app-access=76ef0d45220fdee3ac883a0c7565e50c', '_blank', 'location=no'); 
     });
-*/
+
 
      
  });
 
-
- 
          

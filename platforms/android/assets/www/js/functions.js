@@ -8,6 +8,9 @@
 	var onlineSingleItemPromoPrice;
     var stocksavailable;   
     var onlineSingleItemStocksAvailable;
+
+
+
     var timerId;
     setTimeout(function()
     {
@@ -388,7 +391,7 @@ function bugFix()//sometimes noti popups don't appear so we check it and make th
         ref.addEventListener('loadstart', function(event) { alert('start: ' + event.url); });
         ref.addEventListener('loadstop', function(event) { alert('stop: ' + event.url); });
         ref.addEventListener('loaderror', function(event) { alert('error: ' + event.message); });
-        ref.addEventListener('exit', function(event) { Exit();/*alert(event.type);*/ });
+        ref.addEventListener('exit', function(event) { alert(event.type); });
 
 
 	});
@@ -401,7 +404,7 @@ function bugFix()//sometimes noti popups don't appear so we check it and make th
                 ref.addEventListener('loadstart', function(event) { alert('start: ' + event.url); });
         ref.addEventListener('loadstop', function(event) { alert('stop: ' + event.url); });
         ref.addEventListener('loaderror', function(event) { alert('error: ' + event.message); });
-        ref.addEventListener('exit', function(event) {  Exit();/*alert(event.type);*/ });
+        ref.addEventListener('exit', function(event) {  alert(event.type); });
         
 
     });

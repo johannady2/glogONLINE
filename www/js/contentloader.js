@@ -32,16 +32,23 @@
 					 $('nav , footer').show();
 					 $('.splashscreencont').remove();
 
-                  
+
                     
+                  
+                  
+            
 
                    // ref = window.open('http://viveg.net/index.php?controller=order&glog-app-access=76ef0d45220fdee3ac883a0c7565e50c', '_blank', 'location=no,toolbar=no'); 
                     ref = window.open('http://viveg.net/index.php?glog-app-access=76ef0d45220fdee3ac883a0c7565e50c', '_blank', 'location=no'); 
                     ref.addEventListener('loadstart', function(event) { alert('start: ' + event.url); });
-                     ref.addEventListener('loadstop', function(event) { alert('stop: ' + event.url); });
+                     ref.addEventListener('loadstop', function(event){
+                         ref.executeScript({file: "../js/custom.js"},function(){alert('script inserted');});
+                        ref.insertCSS({file: "../css/custom.css"},function(){ alert('css inserted');});
+                     });
                      ref.addEventListener('loaderror', function(event) { alert('error: ' + event.message); });
                      ref.addEventListener('exit', function(event) { alert(event.type);});
                     //scanner.startScanning(MWBSInitSpace.init,MWBSInitSpace.callback);
+                  
 
 				 });
          });
@@ -62,6 +69,4 @@
      
  });
 
-
- 
          
