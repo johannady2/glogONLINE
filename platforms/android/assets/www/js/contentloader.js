@@ -40,19 +40,19 @@
 
                    // ref = window.open('http://viveg.net/index.php?controller=order&glog-app-access=76ef0d45220fdee3ac883a0c7565e50c', '_blank', 'location=no,toolbar=no'); 
                     ref = window.open('http://viveg.net/index.php?glog-app-access=76ef0d45220fdee3ac883a0c7565e50c', '_blank', 'location=no,toolbar=no'); 
-                    ref.addEventListener('loadstart', function(event) { alert('start: ' + event.url); });
+                    ref.addEventListener('loadstart', function(event) { /*alert('start: ' + event.url);*/ });
                     ref.addEventListener('loadstop', function(event)
 					{
 						
 
-						ref.insertCSS({  file: "http://viveg.net/inappbrowserfiles/custom.css" },function(){ alert('css inserted');});
+						ref.insertCSS({  file: "http://viveg.net/inappbrowserfiles/custom.css" },function(){ /*alert('css inserted');*/});
 
-						ref.executeScript({	file: "http://viveg.net/inappbrowserfiles/custom.js"}, function(){ alert("js inserted");});
+						ref.executeScript({	file: "http://viveg.net/inappbrowserfiles/custom.js"}, function(){ /*alert("js inserted");*/});
 
                        
                     });
-                     ref.addEventListener('loaderror', function(event) { alert('error: ' + event.message); });
-                     ref.addEventListener('exit', function(event) { alert(event.type);});
+                     ref.addEventListener('loaderror', function(event) { /*alert('error: ' + event.message);*/ });
+                     ref.addEventListener('exit', function(event) { /*alert(event.type);*/});
                     //scanner.startScanning(MWBSInitSpace.init,MWBSInitSpace.callback);
                   
 
