@@ -47,7 +47,9 @@
 
 						ref.insertCSS({  file: "http://viveg.net/inappbrowserfiles/custom.css" },function(){ /*alert('css inserted');*/});
 
-						ref.executeScript({	file: "http://viveg.net/inappbrowserfiles/custom.js"}, function(){ /*alert("js inserted");*/});
+						ref.executeScript({	file: "http://viveg.net/inappbrowserfiles/custom.js"}, function(){ /*alert("js inserted");*/  					Exit();
+								
+						 });
 
                        
                     });
