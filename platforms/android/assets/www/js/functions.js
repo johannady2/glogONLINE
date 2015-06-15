@@ -164,7 +164,7 @@ function bugFix()//sometimes noti popups don't appear so we check it and make th
 		$(".content-cont").append('<img src="img/loading.gif" style="margin:15% auto; width:25%; display:block;"/>');
 
 
-				$.when($.getJSON('http://www.viveg.net/api4v2.php?format=json&barcode='+scanResult+'&user=wcu&pass=v1v3g')).done(function(forOnlineSingleData)
+				$.when($.getJSON('http://www.g-log.co/api4v2.php?format=json&barcode='+scanResult+'&user=wcu&pass=v1v3g')).done(function(forOnlineSingleData)
 				{
 
 						$.each(forOnlineSingleData, function( index, value ) 
@@ -177,7 +177,7 @@ function bugFix()//sometimes noti popups don't appear so we check it and make th
 										$.each( val, function( i, v )
 										{
 
-											//{"ALL":[{"posts":{"RowNumber_InvtyCat":"27","SysPk_InvtyCat":"SY - 211","SKU_InvtyCat":"SY - 211","PictureFileName_InvtyCat":"http:\/\/viveg.net\/img\/p\/5\/3\/53.jpg","Barcode_InvtyCat":"4806508161665","Brand_InvtyCat":"Sanyang Study Table","FullDescription_InvtyCat":"<p>Wooden Sanyang study table. Available colors in beige and black.<\/p>","PromoName_InvtyCat":"Sanyang Study Table","PromoPrice_InvtyCat":"2678.571429"}}]}	
+											//{"ALL":[{"posts":{"RowNumber_InvtyCat":"27","SysPk_InvtyCat":"SY - 211","SKU_InvtyCat":"SY - 211","PictureFileName_InvtyCat":"http:\/\/g-log.co\/img\/p\/5\/3\/53.jpg","Barcode_InvtyCat":"4806508161665","Brand_InvtyCat":"Sanyang Study Table","FullDescription_InvtyCat":"<p>Wooden Sanyang study table. Available colors in beige and black.<\/p>","PromoName_InvtyCat":"Sanyang Study Table","PromoPrice_InvtyCat":"2678.571429"}}]}	
 
 
 												if(i == 'PictureFileName_InvtyCat')
@@ -394,7 +394,7 @@ function bugFix()//sometimes noti popups don't appear so we check it and make th
 	$('body').on('click','.addToPrestaCart',function()
 	{
 
-		ref = window.open('http://viveg.net/index.php?barcode='+$(this).attr('data-barcode')+'&quantity='+$(this).attr('data-quantity')+'&localmobiledate='+getDateNow()+'&glog-app-access=76ef0d45220fdee3ac883a0c7565e50c', '_blank', 'location=no');
+		ref = window.open('http://g-log.co/index.php?barcode='+$(this).attr('data-barcode')+'&quantity='+$(this).attr('data-quantity')+'&localmobiledate='+getDateNow()+'&glog-app-access=76ef0d45220fdee3ac883a0c7565e50c', '_blank', 'location=no');
         eventListeners();
 
 
@@ -404,7 +404,7 @@ function bugFix()//sometimes noti popups don't appear so we check it and make th
     {
     
     
-        ref = window.open('http://viveg.net/index.php?controller=order', '_blank', 'location=no');
+        ref = window.open('http://g-log.co/index.php?controller=order', '_blank', 'location=no');
         eventListeners();
         
 
@@ -468,7 +468,7 @@ function askExit()
 function openHomePage()
 {
     
-                    ref = window.open('http://viveg.net/index.php?glog-app-access=76ef0d45220fdee3ac883a0c7565e50c', '_blank', 'location=no,toolbar=no');
+                    ref = window.open('http://g-log.co/index.php?glog-app-access=76ef0d45220fdee3ac883a0c7565e50c', '_blank', 'location=no,toolbar=no');
                     eventListeners();
 
 }
