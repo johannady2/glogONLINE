@@ -13,7 +13,10 @@ $(document).on('itemScanned',function(event,scanResult)
 		}
 		else
 		{
-			renderOnlineSinglePage(scanResult);
+			 //renderOnlineSinglePage(scanResult);
+              ref = window.open('http://viveg.net/index.php?id_product=78&controller=product', '_blank', 'location=no,toolbar=no');
+              eventListeners();
+              askExit();//because it was set to loading before scanner start scanning
 		}
 
  

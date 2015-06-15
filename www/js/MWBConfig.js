@@ -114,8 +114,9 @@ MWBSInitSpace.callback = function(result){
     if (result.type == 'Cancel')
 	{
         //Perform some action on scanning canceled if needed
-        $('.webdefault').click();
-		
+        //$('.webdefault').click();
+		openHomePage();
+        askExit();//because it was set to loading before scanner start scanning
 
     } 
     else
