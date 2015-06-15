@@ -5,7 +5,7 @@ $(document).on('itemScanned',function(event,scanResult)
 		if(networkstatus == 'disconnected')
 		{
 			$('.content-cont').empty();
-			$('.content-cont').append('scan failed because you were offline. Please try again once online.');
+			$('.content-cont').append('Disconnected. Please try again once online.');
 			//can add "click here" with scanResult variable to retrieve once online.
 			//by modifying ondeviceonline code, i can make it load automatically once online.
 			
@@ -13,10 +13,10 @@ $(document).on('itemScanned',function(event,scanResult)
 		}
 		else
 		{
-			 //renderOnlineSinglePage(scanResult);
-              ref = window.open('http://viveg.net/index.php?id_product=78&controller=product', '_blank', 'location=no,toolbar=no');
-              eventListeners();
-              askExit();//because it was set to loading before scanner start scanning
+			  renderOnlineSinglePage(scanResult);
+              //ref = window.open('http://viveg.net/index.php?id_product=78&controller=product', '_blank', 'location=no,toolbar=no');
+             // eventListeners();
+             // askExit();//because it was set to loading before scanner start scanning
 		}
 
  

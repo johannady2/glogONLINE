@@ -24,8 +24,8 @@
 						jQuery('body').unbind('touchmove');
 					 	$('.bxslider').hide();
 					 	
-					 	//$('.content-cont').append('<p>You have\'nt scanned anything. <a href="#"  onclick="scanner.startScanning(MWBSInitSpace.init,MWBSInitSpace.callback)">Click here</a> to scan an item.</p>');
-                    //askExit();
+					
+                      askExit();
 					 $('nav , footer').show();
 					 $('.splashscreencont').remove();
 
