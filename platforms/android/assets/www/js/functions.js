@@ -93,8 +93,14 @@ function Exit()
                 function(i){
                     if(i==2)
                      {
-                       navigator.app.exitApp(); //This will Close the App
-                       
+                         if (navigator.userAgent.match(/(iPod|iPhone|iPad)/))
+                         {
+                            alert('Use home button to exit on ios device');
+                         }
+                         else
+                         {
+                              navigator.app.exitApp(); //This will Close the App
+                         }
                      }
                 },              
                 '',            
@@ -469,7 +475,8 @@ function openHomePage()
 
 function eventListeners()
 {
-                     ref.addEventListener('loadstart', function(event) { /*alert('start: ' + event.url);*/ });
+
+                     ref.addEventListener('loadstart', function(event) { /*alert('start: ' + event.url);*/  });
                     ref.addEventListener('loadstop', function(event)
 					{
 						
@@ -502,6 +509,8 @@ function eventListeners()
                                                                        clearInterval(bTimerId);
                                                                        scanner.startScanning(MWBSInitSpace.init,MWBSInitSpace.callback);
                                                                     }
+                                                                  
+                                                                    
                                                                     
                                                             });
                                                         }
