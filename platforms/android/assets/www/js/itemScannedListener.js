@@ -15,7 +15,7 @@ $(document).on('itemScanned',function(event,scanResult)
 		{
 			  //renderOnlineSinglePage(scanResult);
               //ref = window.open('http://viveg.net/index.php?id_product=78&controller=product', '_blank', 'location=no,toolbar=no');
-              ref = window.open('http://g-log.co/redirect.php?barcode='+scanResult, '_blank', 'location=no,toolbar=no');
+              ref = window.open('http://'+glogOrViveg+'/redirect.php?barcode='+scanResult, '_blank', 'location=no,toolbar=no');
               eventListeners();
               askExit();//because it was set to loading before scanner start scanning
 		}

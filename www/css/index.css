@@ -411,12 +411,20 @@ body
 }
 
 
-.viewItem , .addToList,.addToCart , .saveChanges , .removeFromCart , .SearchBtn , .addToPrestaCart ,.yesExit, .noContinue
+.viewItem , .addToList,.addToCart , .saveChanges , .removeFromCart , .SearchBtn , .addToPrestaCart ,.yesExit, .noContinue , .g-log , .viveg
 {
     width:100%;
     min-height:50px;
     font-size:25px;
     
+}
+
+.yesExitDisabledLook,.yesExitDisabledLook:hover ,.yesExitDisabledLook:visited, .yesExitDisabledLook:active
+{
+     width:100%;
+    min-height:50px;
+    font-size:25px;
+    background-color:darkgrey!important;
 }
 
 .orderAll 
@@ -865,13 +873,22 @@ video#bgvid{
     }
 
     
-    .viewItem , .addToList,.addToCart , .saveChanges , .removeFromCart , .SearchBtn , .addToPrestaCart ,.yesExit, .noContinue
+    .viewItem , .addToList,.addToCart , .saveChanges , .removeFromCart , .SearchBtn , .addToPrestaCart ,.yesExit, .noContinue , .g-log , .viveg
     {
         width:100%;
         font-weight:bold;
         min-height:35px;
         font-size:15px;
 
+    }
+
+    .yesExitDisabledLook,.yesExitDisabledLook:hover ,.yesExitDisabledLook:visited, .yesExitDisabledLook:active
+    {
+        width:100%;
+        font-weight:bold;
+        min-height:35px;
+        font-size:15px;
+        background-color:darkgrey !important;
     }
 
 }

@@ -24,21 +24,21 @@
 						jQuery('body').unbind('touchmove');
 					 	$('.bxslider').hide();
 					 	
-					
-                      askExit();
-					 $('nav , footer').show();
-					 $('.splashscreencont').remove();
+                  
+                  
+
+                    $('nav , footer').show();
+                    $('.splashscreencont').remove();
+                    
+					   chooseurl();
+                  
+                  
+                    //askExit();    
+                    //openHomePage();
+
 
 
                     
-                  
-                  
-            
-                    openHomePage();
-
-
-
-                    //scanner.startScanning(MWBSInitSpace.init,MWBSInitSpace.callback);
                   
 
 				 });
@@ -46,7 +46,14 @@
 
     $('body').on("click",'.yesExit', function()
      {
-          navigator.app.exitApp();
+                         if (navigator.userAgent.match(/(iPod|iPhone|iPad)/))
+                         {
+                            alert('Use home button to exit on ios device');
+                         }
+                         else
+                         {
+                              navigator.app.exitApp(); //This will Close the App
+                         }
      });
 
     $('body').on("click",'.noContinue', function()
@@ -55,5 +62,26 @@
     });
 
 
+     $('body').on('click','.chooseurl', function()
+    {
+         
+         $('.noti-any , .noti-blanket').hide();
+         $('.noti-any').empty();
+         
+        if($(this).attr('class') == 'btn btn-large btn-success chooseurl g-log')
+        {
+            glogOrViveg = 'g-log.co';
+            
+            
+        }
+        else if($(this).attr('class') == 'btn btn-large btn-primary chooseurl viveg')
+        {
+             glogOrViveg = 'viveg.net';
+             
+        }
+         
+        askExit();
+        openHomePage();
+     });
      
  });
