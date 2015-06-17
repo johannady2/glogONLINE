@@ -1,4 +1,4 @@
-	var glogOrViveg;
+	var glogOrViveg = 'g-log.co';
 
     var networkstatus = '';
     var ref = null;
