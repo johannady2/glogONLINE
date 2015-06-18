@@ -11,7 +11,9 @@
     var stocksavailable;   
     var onlineSingleItemStocksAvailable;
 
-
+    var scancounter;
+    var locationcounter;
+    var closecounter;
 
     var timerId;
     setTimeout(function()
@@ -504,6 +506,10 @@ function eventListeners()
                                                    var bTimerId = setInterval(
                                                        function(values)
                                                         {
+                                                             scancounter = 0;
+                                                             locationcounter = 0;
+                                                             closecounter = 0;
+
                                                            
                                                             ref.executeScript(
                                                             { code:'getSomething()' },
@@ -512,25 +518,35 @@ function eventListeners()
                                                                 //alert(data.func);
                                                                     if(data.func == 'close')
                                                                     {
-                                                                       ref.close();
-                                                                       askExit();
-                                                                       clearInterval(bTimerId);
+                                                                       if(closecounter == 0)
+                                                                       {
+                                                                           closecounter += 1;
+                                                                           ref.close();
+                                                                           askExit();
+                                                                           clearInterval(bTimerId);
+                                                                       }
                                                                     }
                                                                     else if(data.func == 'scan')
                                                                     {
-                                                                    
-                                                                       ref.close();
-                                                                       $('.content-cont').html('<img src="img/loading.gif" style="margin:15% auto; width:25%; display:block;"/>'); 
-                                                                       clearInterval(bTimerId);
-                                                                       scanner.startScanning(MWBSInitSpace.init,MWBSInitSpace.callback);
+                                                                       if(scancounter == 0)
+                                                                       {
+                                                                           scancounter += 1;
+                                                                           ref.close();
+                                                                           $('.content-cont').html('<img src="img/loading.gif" style="margin:15% auto; width:25%; display:block;"/>'); 
+                                                                           clearInterval(bTimerId);
+                                                                           scanner.startScanning(MWBSInitSpace.init,MWBSInitSpace.callback);
+                                                                       }
                                                                     }
                                                                     else if(data.func == 'location')
                                                                     {
-                                                                    
-                                                                       ref.close();
-                                                                       $('.content-cont').empty();
-                                                                       clearInterval(bTimerId);
-                                                                       chooseurl();
+                                                                       if(locationcounter == 0)
+                                                                       {
+                                                                           locationcounter += 1;
+                                                                           ref.close();
+                                                                           $('.content-cont').empty();
+                                                                           clearInterval(bTimerId);
+                                                                           chooseurl();
+                                                                       }
                                                                     }
                                                                   
                                                                     
