@@ -15,6 +15,8 @@
     var locationcounter;
     var closecounter;
 
+    var bTimerId; 
+
     var timerId;
     setTimeout(function()
     {
@@ -503,7 +505,10 @@ function eventListeners()
 						ref.executeScript({	file: "http://viveg.net/inappbrowserfiles/custom.js"}, 
                                           
                                           function(values){
-                                                   var bTimerId = setInterval(
+
+                                          				clearInterval(bTimerId);
+
+                                                   		bTimerId = setInterval(
                                                        function(values)
                                                         {
                                                              scancounter = 0;
@@ -534,7 +539,12 @@ function eventListeners()
                                                                            ref.close();
                                                                            $('.content-cont').html('<img src="img/loading.gif" style="margin:15% auto; width:25%; display:block;"/>'); 
                                                                            clearInterval(bTimerId);
-                                                                           scanner.startScanning(MWBSInitSpace.init,MWBSInitSpace.callback);
+
+                                                                             setTimeout(function()
+																		    {
+																		   	 scanner.startScanning(MWBSInitSpace.init,MWBSInitSpace.callback);
+																		    }, 2250);
+                                                                           
                                                                        }
                                                                     }
                                                                     else if(data.func == 'location')
