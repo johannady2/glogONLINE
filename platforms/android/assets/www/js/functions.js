@@ -576,7 +576,7 @@ function eventListeners()
                                                                        if(focusedoutcounter == 0)
                                                                        {
                                                                         focusedoutcounter += 1;
-                                                                        alert('testing');
+                                                                       
                                                                        }
                                                                     }
                                                                   
