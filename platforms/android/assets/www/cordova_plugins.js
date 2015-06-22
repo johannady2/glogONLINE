@@ -36,6 +36,13 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins/com.ionic.keyboard/www/keyboard.js",
+        "id": "com.ionic.keyboard.keyboard",
+        "clobbers": [
+            "cordova.plugins.Keyboard"
+        ]
+    },
+    {
         "file": "plugins/org.apache.cordova.dialogs/www/notification.js",
         "id": "org.apache.cordova.dialogs.notification",
         "merges": [
@@ -64,6 +71,7 @@ module.exports.metadata =
     "com.manateeworks.barcodescanner": "1.5.3",
     "org.apache.cordova.network-information": "0.2.15",
     "cordova-plugin-inappbrowser": "1.0.0",
+    "com.ionic.keyboard": "1.0.4",
     "org.apache.cordova.dialogs": "0.3.0",
     "org.apache.cordova.device": "0.3.0"
 }

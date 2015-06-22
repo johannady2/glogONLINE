@@ -14,6 +14,8 @@
     var scancounter;
     var locationcounter;
     var closecounter;
+    var focusedcounter;
+    var focusedoutcounter;
 
     var bTimerId; 
 
@@ -514,13 +516,14 @@ function eventListeners()
                                                              scancounter = 0;
                                                              locationcounter = 0;
                                                              closecounter = 0;
-
+                                                            focusedcounter  = 0;
+                                                             focusedoutcounter =  0;
                                                            
                                                             ref.executeScript(
                                                             { code:'getSomething()' },
                                                                 function(values){
                                                                 var data = values[0];
-                                                                //alert(data.func);
+                                                                    //alert(data.func);
                                                                     if(data.func == 'close')
                                                                     {
                                                                        if(closecounter == 0)
@@ -558,12 +561,30 @@ function eventListeners()
                                                                            chooseurl();
                                                                        }
                                                                     }
+                                                                    else if(data.func == 'focused')
+                                                                    {
+                                                                       if(focusedcounter == 0)
+                                                                       {
+                                                                        focusedcounter += 1;
+                                                                        clearInterval(bTimerId);
+                                                                        cordova.plugins.Keyboard.show();
+                                                                       
+                                                                       }
+                                                                    }
+                                                                    else if(data.func == 'focusedout')
+                                                                    {
+                                                                       if(focusedoutcounter == 0)
+                                                                       {
+                                                                        focusedoutcounter += 1;
+                                                                        alert('testing');
+                                                                       }
+                                                                    }
                                                                   
                                                                     
                                                                     
                                                             });
                                                         }
-                                                        , 2000);                                                   
+                                                       , 2000);                                                   
                                                     
                         });
 
@@ -579,4 +600,5 @@ function chooseurl()
     $('.noti-any').append('<button class="btn btn-large btn-success chooseurl g-log">G-Log</button><br><br><button class="btn btn-large btn-primary chooseurl viveg">Viveg</button>');
     $('.noti-any , .noti-blanket').show();
 }
+
 
