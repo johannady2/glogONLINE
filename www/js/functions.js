@@ -497,101 +497,42 @@ function openHomePage()
 function eventListeners()
 {
 
-                     ref.addEventListener('loadstart', function(event) { /*alert('start: ' + event.url);*/  });
+                     ref.addEventListener('loadstart', 
+                     function(event)
+                     { 
+                         /*alert('start: ' + event.url);*/
+                         if(getUrlVars(event.url)['valll'] == 'close')
+                         {
+                             //alert(getUrlVars(event.url)['valll']);
+                             ref.close();
+                         }
+                         else if(getUrlVars(event.url)['valll'] == 'scan')
+                         {      
+                              //alert(getUrlVars(event.url)['valll']);
+                              ref.close();
+                              $('.content-cont').html('<img src="img/loading.gif" style="margin:15% auto; width:25%; display:block;"/>'); 
+                                 setTimeout(function()
+                                {
+                                 scanner.startScanning(MWBSInitSpace.init,MWBSInitSpace.callback);
+                                },500);
+                         }
+                     });
                     ref.addEventListener('loadstop', function(event)
 					{
 						
 
 						ref.insertCSS({  file: "http://viveg.net/inappbrowserfiles/custom.css" },function(){ /*alert('css inserted');*/});
 
-						ref.executeScript({	file: "http://viveg.net/inappbrowserfiles/custom.js"}, 
-                                          
-                                          function(values){
-
-                                          				clearInterval(bTimerId);
-
-                                                   		bTimerId = setInterval(
-                                                       function(values)
-                                                        {
-                                                             scancounter = 0;
-                                                             locationcounter = 0;
-                                                             closecounter = 0;
-                                                            focusedcounter  = 0;
-                                                             focusedoutcounter =  0;
-                                                           
-                                                            ref.executeScript(
-                                                            { code:'getSomething()' },
-                                                                function(values){
-                                                                var data = values[0];
-                                                                    //alert(data.func);
-                                                                    if(data.func == 'close')
-                                                                    {
-                                                                       if(closecounter == 0)
-                                                                       {
-                                                                           closecounter += 1;
-                                                                           ref.close();
-                                                                           askExit();
-                                                                           clearInterval(bTimerId);
-                                                                       }
-                                                                    }
-                                                                    else if(data.func == 'scan')
-                                                                    {
-                                                                       if(scancounter == 0)
-                                                                       {
-                                                                           scancounter += 1;
-                                                                           ref.close();
-                                                                           $('.content-cont').html('<img src="img/loading.gif" style="margin:15% auto; width:25%; display:block;"/>'); 
-                                                                           clearInterval(bTimerId);
-
-                                                                             setTimeout(function()
-																		    {
-																		   	 scanner.startScanning(MWBSInitSpace.init,MWBSInitSpace.callback);
-																		    }, 2250);
-                                                                           
-                                                                       }
-                                                                    }
-                                                                    else if(data.func == 'location')
-                                                                    {
-                                                                       if(locationcounter == 0)
-                                                                       {
-                                                                           locationcounter += 1;
-                                                                           ref.close();
-                                                                           $('.content-cont').empty();
-                                                                           clearInterval(bTimerId);
-                                                                           chooseurl();
-                                                                       }
-                                                                    }
-                                                                    else if(data.func == 'focused')
-                                                                    {
-                                                                       if(focusedcounter == 0)
-                                                                       {
-                                                                        focusedcounter += 1;
-                                                                        clearInterval(bTimerId);
-                                                                        cordova.plugins.Keyboard.show();
-                                                                       
-                                                                       }
-                                                                    }
-                                                                    else if(data.func == 'focusedout')
-                                                                    {
-                                                                       if(focusedoutcounter == 0)
-                                                                       {
-                                                                        focusedoutcounter += 1;
-                                                                       
-                                                                       }
-                                                                    }
-                                                                  
-                                                                    
-                                                                    
-                                                            });
-                                                        }
-                                                       , 2000);                                                   
-                                                    
-                        });
+						ref.executeScript({	file: "http://viveg.net/inappbrowserfiles/custom2.js"}, function(values){ /*alert(event.url); alert(getUrlVars(event.url)['token']);*/  });
 
                        
                     });
                      ref.addEventListener('loaderror', function(event) { /*alert('error: ' + event.message);*/ });
                      ref.addEventListener('exit', function(event) { /*alert(event.type);*/});
+    
+    
+    
+
 }
 
 function chooseurl()
@@ -602,3 +543,15 @@ function chooseurl()
 }
 
 
+function getUrlVars(x)
+{
+    var vars = [], hash;
+    var hashes = x.slice(x.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
