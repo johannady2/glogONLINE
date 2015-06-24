@@ -500,6 +500,8 @@ function eventListeners()
                      ref.addEventListener('loadstart', 
                      function(event)
                      { 
+                         
+
                          /*alert('start: ' + event.url);*/
                          if(getUrlVars(event.url)['valll'] == 'close')
                          {
@@ -516,19 +518,36 @@ function eventListeners()
                                  scanner.startScanning(MWBSInitSpace.init,MWBSInitSpace.callback);
                                 },500);
                          }
+                         else
+                         {
+                                navigator.notification.activityStart("", "Please Wait....");
+                             	
+                                /* custom loading...
+                                setTimeout(function()
+                                {       ref.insertCSS({  file: "http://viveg.net/inappbrowserfiles/startcustom.css" },function(){});
+                                 		ref.executeScript({	code: "if(($('.loadinggif').length <= 0) && ($('#customheader').length <= 0)){$('body').append('<div class=\"loadinggif-cont\"><img src=\"http://viveg.net/inappbrowserfiles/loading.gif\" class=\"loadinggif\"></div>');}"}, function(values){   });
+                                 
+                                },1000);*/
+                         }
+                         
                      });
                     ref.addEventListener('loadstop', function(event)
 					{
-						
+						 
 
 						ref.insertCSS({  file: "http://viveg.net/inappbrowserfiles/custom.css" },function(){ /*alert('css inserted');*/});
 
-						ref.executeScript({	file: "http://viveg.net/inappbrowserfiles/custom2.js"}, function(values){ /*alert(event.url); alert(getUrlVars(event.url)['token']);*/  });
+						ref.executeScript({	file: "http://viveg.net/inappbrowserfiles/custom2.js"}, function(values){ /*alert(event.url);*/
+                        
+                         //hide custom loading //ref.executeScript({code:" $('.loadinggif-cont').remove();	$('.loadinggif').remove(); "},function(values){});
+                        
+                        });
+                        navigator.notification.activityStop();
 
                        
                     });
-                     ref.addEventListener('loaderror', function(event) { /*alert('error: ' + event.message);*/ });
-                     ref.addEventListener('exit', function(event) { /*alert(event.type);*/});
+                     ref.addEventListener('loaderror', function(event) { /*alert('error: ' + event.message);*/ navigator.notification.activityStop(); });
+                     ref.addEventListener('exit', function(event) { /*alert(event.type);*/  navigator.notification.activityStop();});
     
     
     
