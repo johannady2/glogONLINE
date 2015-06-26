@@ -11,13 +11,9 @@
     var stocksavailable;   
     var onlineSingleItemStocksAvailable;
 
-    var scancounter;
-    var locationcounter;
-    var closecounter;
-    var focusedcounter;
-    var focusedoutcounter;
+    var isTimeOUtOn = 0;
 
-    var bTimerId; 
+    var onlineSingleInterval;
 
     var timerId;
     setTimeout(function()
@@ -30,8 +26,7 @@
 
 
 
-
-
+   
 
 
 	if(scanResultWhenOffline == null)//initialize when not initialized
@@ -56,6 +51,17 @@
 
 
 
+    $('.content-cont').bind("DOMSubtreeModified",function()
+    {  //clearing interval when not in single page
+        if($('.single-cont').length <= 0 && $('.splashpageindicator').length <= 0 && isTimeOUtOn == 1)
+        {
+            isTimeOUtOn = 0;
+            
+            clearInterval(onlineSingleInterval);
+            
+        }
+    });
+
 
 	function onDeviceOffline()
 	{
@@ -64,7 +70,8 @@
 		$('.splashscreencont').hide();
 		$('.noti-blanket , .noti-offline').show();
 
-			networkstatus = 'disconnected';
+        ref.close();
+		networkstatus = 'disconnected';
 
 
 	}
@@ -166,13 +173,117 @@ function bugFix()//sometimes noti popups don't appear so we check it and make th
 	/*----------------------------------------------------------------------*/
 	/*-------------------online-single-item.html------------------------------*/
 	/*----------------------------------------------------------------------*/
+
+
+    function updateInfo(scanResult)
+    {
+        $.when($.getJSON('http://'+glogOrViveg+'/api4v2.php?format=json&barcode='+scanResult+'&user=wcu&pass=v1v3g')).done(function(forOnlineSingleData)
+				{
+
+						$.each(forOnlineSingleData, function( index, value ) 
+						  {
+
+								$.each(value, function(inde, valu)
+								{
+									$.each(valu, function(ind, val)
+									{
+										$.each( val, function( i, v )
+										{
+
+
+												if(i == 'PictureFileName_InvtyCat')
+												{	
+													onlineSingleItemPictureFileName = val[i];
+												}
+												else if(i == 'Barcode_InvtyCat')
+												{
+													onlineSingleItemBarcode = val[i];
+												}
+												else if(i == 'Brand_InvtyCat')
+												{
+													onlineSingleItemBrand = val[i];
+												}
+												else if(i == 'FullDescription_InvtyCat')
+												{
+													 onlineSingleItemFullDescription = val[i];
+												}
+												else if(i == 'PromoName_InvtyCat')
+												{
+													 onlineSingleItemPromoName = val[i];
+												}
+												else if(i == 'PromoPrice_InvtyCat')
+												{
+													 onlineSingleItemPromoPrice = val[i];
+												}
+                                                else if(i == 'Stock_InvtyCat')
+                                                {
+                                                    onlineSingleItemStocksAvailable = val[i];
+                                                }
+                
+
+										});	
+
+									});	
+
+								});
+						  });
+
+
+				}).then(function(objects)
+				{
+
+                    if(onlineSingleItemBarcode != null && onlineSingleItemBarcode != '')
+					{
+                        	$('.addToPrestaCart').attr('data-barcode',onlineSingleItemBarcode);
+							$('.onlineSingleItemPromoPrice').html(onlineSingleItemPromoPrice);
+							$('.glogtotal').html(onlineSingleItemPromoPrice);
+							$('.onlineSingleItemPictureFileName').attr('src',onlineSingleItemPictureFileName);
+							$('.onlineSingleItemFullDescription').html(onlineSingleItemFullDescription);
+							$('.onlineSingleItemBrand').html(onlineSingleItemBrand);
+							$('.onlineSingleItemPromoName').html(onlineSingleItemPromoName);
+							$('.onlineSingleItemStocksAvailable').html(onlineSingleItemStocksAvailable);
+                        
+                        
+                        /*because when item is not available, variables are not updated which causes the last avaialble item to appear on online-single-item.html... By assigning them with '' value, I can output, "iteme unavailable" when value is '' item is not available according to the api*/
+                            onlineSingleItemPictureFileName = '';
+							onlineSingleItemBarcode = '';
+							onlineSingleItemBrand = '';
+							onlineSingleItemFullDescription = '';
+							onlineSingleItemPromoName = '';
+							onlineSingleItemPromoPrice = '';
+                            stocksavailable =  onlineSingleItemStocksAvailable;
+                            onlineSingleItemStocksAvailable = '';
+                        
+                        
+                        if($('#onlineSingleItemEnteredQuantity').val() > stocksavailable)
+                        {
+                            
+                            $('.noti-any , .noti-blanket').show();
+                            $('.noti-any').empty();
+                            $('.noti-any').append('There are only  ' + stocksavailable + '  stocks left');
+                            
+                            $('#onlineSingleItemEnteredQuantity').val(stocksavailable);
+                            
+                            setTimeout(function()
+                            {
+                                 $('.noti-any , .noti-blanket').hide();
+                            }, 1500);
+                        }
+                        
+                    }
+
+
+				});
+
+    }
+    
 	function renderOnlineSinglePage(scanResult)
 	{
 		$(".content-cont").empty();
 		$(".content-cont").append('<img src="img/loading.gif" style="margin:15% auto; width:25%; display:block;"/>');
 
 
-				$.when($.getJSON('http://www.'+glogOrViveg+'/api4v2.php?format=json&barcode='+scanResult+'&user=wcu&pass=v1v3g')).done(function(forOnlineSingleData)
+				$.when($.getJSON('http://'+glogOrViveg+'/api4v2.php?format=json&barcode='+scanResult+'&user=wcu&pass=v1v3g')).done(function(forOnlineSingleData)
 				{
 
 						$.each(forOnlineSingleData, function( index, value ) 
@@ -240,6 +351,8 @@ function bugFix()//sometimes noti popups don't appear so we check it and make th
 
 
 					 $(".content-cont").empty();
+                    
+                   
 					if(onlineSingleItemBarcode != null && onlineSingleItemBarcode != '')
 					{
 						$(".content-cont").unload().load('online-single-item.html',  null, function()
@@ -260,13 +373,20 @@ function bugFix()//sometimes noti popups don't appear so we check it and make th
                                 $('.addToPrestaCart').after('<p class="warning">Item out of stock</p>');
                                 $('.addToPrestaCart').hide();
                             }
-                            /*
-                            setTimeout(function()
-                            {
-                                 $('.content-cont').empty();
-                                $('.content-cont').append('<p>Time Out. Please Scan Again.  <a href="#" onclick="scanner.startScanning(MWBSInitSpace.init,MWBSInitSpace.callback)">Click here</a></p>');
+                          
 
-                            }, 60000);*/
+                                onlineSingleInterval = setInterval(function()
+                                {
+
+                                   // $('.content-cont').empty();
+                                   // $('.content-cont').append('<p>Time Out. Please Scan Again.  <a href="#" onclick="scanner.startScanning(MWBSInitSpace.init,MWBSInitSpace.callback)">Click here</a></p>');
+                                    updateInfo(scanResult);
+                                    
+                                    isTimeOUtOn = 1;
+                             
+
+                                }, 10000);
+                            
 
 							/*because when item is not available, variables are not updated which causes the last avaialble item to appear on online-single-item.html... By assigning them with '' value, I can output, "iteme unavailable" when value is '' item is not available according to the api*/
 							onlineSingleItemPictureFileName = '';
@@ -285,8 +405,14 @@ function bugFix()//sometimes noti popups don't appear so we check it and make th
 					}
 					else
 					{
-						$(".content-cont").empty();
-						$(".content-cont").append('<p>Item Unavailable</p>');
+						//$(".content-cont").empty();
+						//$(".content-cont").append('<p>Item Unavailable</p>');
+                         
+                        
+                        //open presta message instead.
+                        ref = window.open('http://'+glogOrViveg+'/redirect.php?barcode='+scanResult, '_blank', 'location=no,toolbar=no');
+                        eventListeners();
+                        askExit();
 					}
 
 
@@ -404,6 +530,7 @@ function bugFix()//sometimes noti popups don't appear so we check it and make th
 
 		ref = window.open('http://'+glogOrViveg+'/index.php?barcode='+$(this).attr('data-barcode')+'&quantity='+$(this).attr('data-quantity')+'&localmobiledate='+getDateNow()+'&glog-app-access=76ef0d45220fdee3ac883a0c7565e50c', '_blank', 'location=no');
         eventListeners();
+        askExit();
 
 
 	});
@@ -480,7 +607,7 @@ function askExit()
 	 {
 	    $('.yesExit').hide();
 
-	    $('.disabledHere').append('<button class="btn btn-sm btn-danger yesExitDisabledLook">Exit</button></div></div>');
+	    //$('.disabledHere').append('<button class="btn btn-sm btn-danger yesExitDisabledLook">Exit</button></div></div>');
   						
 	 }
 
@@ -506,6 +633,7 @@ function eventListeners()
                          if(getUrlVars(event.url)['valll'] == 'close')
                          {
                              //alert(getUrlVars(event.url)['valll']);
+                             askExit();
                              ref.close();
                          }
                          else if(getUrlVars(event.url)['valll'] == 'scan')
