@@ -543,7 +543,7 @@ function bugFix()//sometimes noti popups don't appear so we check it and make th
                 {
                      $('.noti-any , .noti-blanket').show();
                      $('.noti-any').empty();
-                     $('.noti-any').append('<h2 class="ItemNote">Item has been added to cart!</h2><br><a href="#" class="btn btn-success btn-large ScanAgain">Scan Again</a><br><br><a href="#" class="btn btn-primary btn-large proceedToCheckOut">Proceed To Checkout</a><br><br>')
+                     $('.noti-any').append('<h3 class="ItemNote">Item has been added to cart</h3><br><a href="#" class="btn btn-success btn-large ScanAgain">Scan Again</a><br><br><a href="#" class="btn btn-primary btn-large proceedToCheckOut">Proceed To Checkout</a><br><br>')
                 }
             });	
             return false;
@@ -551,10 +551,22 @@ function bugFix()//sometimes noti popups don't appear so we check it and make th
 
 	});
 
-    $('body').on('click','.viewOnlineCart',function()
+
+
+    $('body').on('click','.ScanAgain',function()
+    {
+         $('.noti-any , .noti-blanket').hide();
+         $('.noti-any').empty();
+         scanner.startScanning(MWBSInitSpace.init,MWBSInitSpace.callback);
+    });
+
+    
+
+    $('body').on('click','.viewOnlineCart , .proceedToCheckOut',function()
     {
     
-    
+        $('.noti-any , .noti-blanket').hide();
+        $('.noti-any').empty();
         ref = window.open('http://'+glogOrViveg+'/index.php?controller=order', '_blank', 'location=no');
         eventListeners();
         
