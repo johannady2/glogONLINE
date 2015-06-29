@@ -525,12 +525,28 @@ function bugFix()//sometimes noti popups don't appear so we check it and make th
 	}
 
 
-	$('body').on('click','.addToPrestaCart',function()
+	$('body').on('click','.addToPrestaCart',function(event)
 	{
+        event.preventDefault();
+        
+        
+		//ref = window.open('http://'+glogOrViveg+'/index.php?barcode='+$(this).attr('data-barcode')+'&quantity='+$(this).attr('data-quantity')+'&localmobiledate='+getDateNow()+'&glog-app-access=76ef0d45220fdee3ac883a0c7565e50c', '_blank', 'location=no');
+       // eventListeners();
+        //askExit();
+            $.ajax
+            ({
 
-		ref = window.open('http://'+glogOrViveg+'/index.php?barcode='+$(this).attr('data-barcode')+'&quantity='+$(this).attr('data-quantity')+'&localmobiledate='+getDateNow()+'&glog-app-access=76ef0d45220fdee3ac883a0c7565e50c', '_blank', 'location=no');
-        eventListeners();
-        askExit();
+                type: "POST",
+                url: 'http://'+glogOrViveg+'/index.php?barcode='+$(this).attr('data-barcode')+'&quantity='+$(this).attr('data-quantity')+'&localmobiledate='+getDateNow()+'&glog-app-access=76ef0d45220fdee3ac883a0c7565e50c',
+                data: { datatest: "data-test" },
+                success: function(data)
+                {
+                     $('.noti-any , .noti-blanket').show();
+                     $('.noti-any').empty();
+                     $('.noti-any').append('<h2 class="ItemNote">Item has been added to cart!</h2><br><a href="#" class="btn btn-success btn-large ScanAgain">Scan Again</a><br><br><a href="#" class="btn btn-primary btn-large proceedToCheckOut">Proceed To Checkout</a><br><br>')
+                }
+            });	
+            return false;
 
 
 	});
