@@ -90,8 +90,12 @@
 		{
 			renderOnlineSinglePage(scanResultWhenOffline);
 		}
-
-
+        
+        if($('.splashscreencont').length <= 0)//splashscreencont is removed when start browsing is clicked. 
+        {
+            askExit();//only ask exit if the splash screen is not visible. otherwise continue shopping and exit button will show up in splashscreen.
+        }
+        
 		$('.noti-blanket, .noti-offline, .splashscreencont').hide();
 		$('.splashscreencont').show();
 		$('.splashloading').hide();
@@ -651,7 +655,7 @@ function openHomePage()
 
 function eventListeners()
 {
-
+                     scanResultWhenOffline = null;//Set to null so if you goffline and go back online, it will not reload the last scanned item.
                      ref.addEventListener('loadstart', 
                      function(event)
                      { 
