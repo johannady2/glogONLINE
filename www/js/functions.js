@@ -571,7 +571,7 @@ function bugFix()//sometimes noti popups don't appear so we check it and make th
     
         $('.noti-any , .noti-blanket').hide();
         $('.noti-any').empty();
-        ref = window.open('http://'+glogOrViveg+'/index.php?controller=order', '_blank', 'location=no');
+        ref = window.open('http://'+glogOrViveg+'/index.php?controller=order', '_blank', 'location=no,toolbar=no');
         eventListeners();
         
 
@@ -633,7 +633,7 @@ $('.content-cont').bind("DOMSubtreeModified",function()
 function askExit()
 { 
     $('.content-cont').empty();
-    $('.content-cont').append('<div class="row"><div class="col-md-12 col-sm-12 col-xs-12"><br><p>Would you like to exit this application?</p></div><div class="col-md-12 col-sm-12 col-xs-12"><button class="btn btn-sm btn-success noContinue">Continue Shopping</button></div><div class="col-md-12 col-sm-12 col-xs-12"><br><button class="btn btn-sm btn-danger yesExit">Exit</button></div><div class="col-md-12 col-sm-12 col-xs-12 disabledHere"></div></div>');
+    $('.content-cont').append('<div class="row"><div class="col-md-12 col-sm-12 col-xs-12"><button class="btn btn-sm btn-success noContinue">Continue Shopping</button></div><div class="col-md-12 col-sm-12 col-xs-12"><br><button class="btn btn-sm btn-danger yesExit">Exit</button></div><div class="col-md-12 col-sm-12 col-xs-12 disabledHere"></div></div>');
   						
 	if (navigator.userAgent.match(/(iPod|iPhone|iPad)/))
 	 {
